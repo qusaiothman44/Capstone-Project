@@ -55,7 +55,7 @@ erDiagram
         string name
         string location
         string description
-        string image
+        string cover_image
         float average_rating
     }
 
@@ -70,12 +70,19 @@ erDiagram
         int place_id FK
     }
 
-    USER ||--o{ REVIEW : "writes"
-    PLACE ||--o{ REVIEW : "has"
+    PLACE_IMAGE {
+        int id PK
+        string image
+        int place_id FK
+    }
 
+    USER ||--o{ REVIEW : writes
+    PLACE ||--o{ REVIEW : has_reviews
+    PLACE ||--o{ PLACE_IMAGE : has_images
 
 
 ```````
+
 
 
 
