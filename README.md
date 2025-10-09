@@ -65,20 +65,19 @@ erDiagram
         text comment
         float price
         datetime date_created
-        string photo
         int user_id FK
         int place_id FK
     }
 
-    PLACE_IMAGE {
+    REVIEW_IMAGE {
         int id PK
         string image
-        int place_id FK
+        int review_id FK
     }
 
     USER ||--o{ REVIEW : writes
     PLACE ||--o{ REVIEW : has_reviews
-    PLACE ||--o{ PLACE_IMAGE : has_images
+    REVIEW ||--o{ REVIEW_IMAGE : has_images
 
 
 ```````
