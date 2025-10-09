@@ -33,6 +33,10 @@ To develop a complete, responsive full-stack Django web application that demonst
 
 ---
 
+
+
+
+
 ## ERD Diagram
 ```mermaid
 erDiagram
@@ -63,8 +67,15 @@ erDiagram
         int place_id FK
     }
 
+
+
     USER ||--o{ REVIEW : "writes"
     PLACE ||--o{ REVIEW : "has"
+
+
+
+
+
 
 ## User Stories
 
