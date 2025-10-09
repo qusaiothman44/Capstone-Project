@@ -55,7 +55,7 @@ erDiagram
         string name
         string location
         string description
-        string cover_image
+        string image
         float average_rating
     }
 
@@ -65,23 +65,17 @@ erDiagram
         text comment
         float price
         datetime date_created
+        string photo
         int user_id FK
         int place_id FK
     }
 
-    REVIEW_IMAGE {
-        int id PK
-        string image
-        int review_id FK
-    }
+    USER ||--o{ REVIEW : "writes"
+    PLACE ||--o{ REVIEW : "has"
 
-    USER ||--o{ REVIEW : writes
-    PLACE ||--o{ REVIEW : has_reviews
-    REVIEW ||--o{ REVIEW_IMAGE : has_images
 
 
 ```````
-
 
 
 
