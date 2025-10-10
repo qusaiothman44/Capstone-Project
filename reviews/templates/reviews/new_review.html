@@ -1,0 +1,30 @@
+{% extends "reviews/base.html" %}
+{% block content %}
+<h2>أضف مراجعة جديدة</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <div id="image-fields">
+        <label for="images">أضف صور:</label>
+        <input type="file" name="images">
+    </div>
+
+    <button type="button" onclick="addImageField()">➕ إضافة صورة أخرى</button>
+
+    <br><br>
+    <button type="submit">نشر المراجعة</button>
+</form>
+
+<script>
+    function addImageField() {
+        const container = document.getElementById('image-fields');
+        const newInput = document.createElement('input');
+        newInput.type = 'file';
+        newInput.name = 'images';
+        container.appendChild(document.createElement('br'));
+        container.appendChild(newInput);
+    }
+</script>
+{% endblock %}

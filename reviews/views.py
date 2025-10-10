@@ -1,7 +1,37 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import ReviewForm
+from .models import ReviewImage ,Review
+from django.core.paginator import Paginator
 
-# Create your views here.
-from django.http import HttpResponse
+def new_review(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        images = request.FILES.getlist('images')   
 
-def index(request):
-    return HttpResponse("Welcome to StayStory!")
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user 
+            review.save()
+
+            for image in images:
+                ReviewImage.objects.create(review=review, image=image)
+
+            return redirect('reviews:home')
+    else:
+        form = ReviewForm()
+
+    return render(request, 'reviews/new_review.html', {'form': form})
+
+def review_detail(request, pk):
+    review = Review.objects.get(id=pk)
+    return render(request, 'reviews/review_detail.html', {'review': review})
+
+
+def home(request):
+    reviews = Review.objects.all().order_by('-date_created')
+    paginator = Paginator(reviews, 5)  # 5 مراجعات لكل صفحة
+    page = request.GET.get('page')
+    reviews_page = paginator.get_page(page)
+    return render(request, 'reviews/home.html', {'reviews': reviews_page})   
+
+    
