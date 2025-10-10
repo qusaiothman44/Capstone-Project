@@ -43,7 +43,9 @@ To develop a complete, responsive full-stack Django web application that demonst
 
 ```mermaid
 erDiagram
-    
+    USER ||--o{ REVIEW : writes
+    REVIEW ||--o{ REVIEWIMAGE : contains
+
     USER {
         int id PK
         string username
@@ -64,6 +66,7 @@ erDiagram
         string image
         int review_id FK
     }
+
 
 
 ```````
