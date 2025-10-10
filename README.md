@@ -50,7 +50,6 @@ erDiagram
         int id PK
         string username
         string email
-        ...
     }
     REVIEW {
         int id PK
