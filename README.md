@@ -43,35 +43,28 @@ To develop a complete, responsive full-stack Django web application that demonst
 
 ```mermaid
 erDiagram
+    USER ||--o{ REVIEW : writes
+    REVIEW ||--o{ REVIEWIMAGE : contains
+
     USER {
         int id PK
         string username
         string email
-        string password
     }
-
-    PLACE {
-        int id PK
-        string name
-        string location
-        string description
-        string image
-        float average_rating
-    }
-
     REVIEW {
         int id PK
+        string title
+        text content
         int rating
-        text comment
-        float price
+        string place_name
         datetime date_created
-        string photo
         int user_id FK
-        int place_id FK
     }
-
-    USER ||--o{ REVIEW : "writes"
-    PLACE ||--o{ REVIEW : "has"
+    REVIEWIMAGE {
+        int id PK
+        string image
+        int review_id FK
+    }
 
 
 
