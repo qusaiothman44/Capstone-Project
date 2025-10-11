@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import ReviewForm
 from .models import ReviewImage ,Review
 from django.core.paginator import Paginator
-
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
 def new_review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -35,3 +37,9 @@ def home(request):
     return render(request, 'reviews/home.html', {'reviews': reviews_page})   
 
     
+
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')    

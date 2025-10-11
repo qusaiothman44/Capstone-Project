@@ -18,9 +18,14 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
+from reviews.views import SignUpView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('reviews.urls', namespace='reviews')),
+    path('signup/', SignUpView.as_view(), name='signup'),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ]
 
 if settings.DEBUG:
