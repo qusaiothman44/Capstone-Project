@@ -41,6 +41,7 @@ nav{
         background: #e3ae4e;
     display: grid;
     grid-template-columns: 0fr 1fr 1fr;
+    height: 61px;
 }
 
 body{
@@ -53,7 +54,14 @@ a{
     border-radius: 20px;
 
 }
-
+.fl{
+    color: white;
+    position: fixed;
+    bottom: 30px;
+    background-color: #0ba29b;
+    right: 30px;
+    padding: 1em 0.5em;
+}
 h2{
 color: #0ba29b;}
 
@@ -65,7 +73,7 @@ color: #0ba29b;}
 }
 
 .review-card {
-    background-color: #fff;
+background-color: #353243;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
