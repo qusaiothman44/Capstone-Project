@@ -6,7 +6,7 @@ class ReviewImageInline(admin.TabularInline):
     extra = 1
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['title', 'user', 'rating', 'place_name', 'date_created']
+    list_display = ['title', 'user', 'rating', 'date_created']
     inlines = [ReviewImageInline]
 
 admin.site.register(Review, ReviewAdmin)

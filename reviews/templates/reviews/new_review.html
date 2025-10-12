@@ -5,6 +5,11 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
+    <input id="place-autocomplete" type="text" placeholder="Write here" class="form-control">
+
+<input type="hidden" name="place_name" id="place_name">
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW3ITRLvw3ubpp-xrJ0KyqJsd0AWoZ5xw&libraries=places&language=en"></script>
 
     <div id="image-fields">
         <label for="images">أضف صور:</label>
@@ -26,5 +31,21 @@
         container.appendChild(document.createElement('br'));
         container.appendChild(newInput);
     }
+
+     function initAutocomplete() {
+    const input = document.getElementById('place-autocomplete');
+    const autocomplete = new google.maps.places.Autocomplete(input, {
+      types: ['(cities)'],  
+    });
+
+    autocomplete.addListener('place_changed', function () {
+      const place = autocomplete.getPlace();
+      document.getElementById('place_name').value = place.formatted_address;
+    });
+  }
+
+  window.onload = initAutocomplete;
+initMap();
 </script>
+
 {% endblock %}

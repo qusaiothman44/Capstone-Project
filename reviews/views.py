@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import ReviewForm
-from .models import ReviewImage ,Review
+from .models import ReviewImage ,Review,Place
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -11,8 +11,11 @@ def new_review(request):
         images = request.FILES.getlist('images')   
 
         if form.is_valid():
+            place_name = request.POST.get('place_name')
+            place, _ = Place.objects.get_or_create(name=place_name)
             review = form.save(commit=False)
             review.user = request.user 
+            review.place = place
             review.save()
 
             for image in images:

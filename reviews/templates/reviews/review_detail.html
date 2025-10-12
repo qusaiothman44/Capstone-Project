@@ -4,7 +4,7 @@
 <p>{{ review.user.username }} | {{ review.date_created }}</p>
 <p>{{ review.description }}</p>
 <p>Rating: {{ review.rating }}/5</p>
-<p>المكان: <a href="" target="_blank">{{ review.place_name }}</a></p>
+<p>المكان: <a href="" target="_blank">{{ review.place }}</a></p>
 
 <div class="slider">
     {% for image in review.images.all %}
