@@ -107,9 +107,3 @@ erDiagram
 - **As a visitor:** I want to see user-uploaded photos on the place’s page, so that I can make informed decisions.
 
 ---
-
-### Design & Experience
-- **As a user:** I want the website to be mobile-friendly, so that I can read and post reviews from any device.
-- **As a user:** I want the interface to be clean and consistent, so that I can focus on content without distractions.
-
-
