@@ -45,27 +45,34 @@ To develop a complete, responsive full-stack Django web application that demonst
 erDiagram
     USER ||--o{ REVIEW : writes
     REVIEW ||--o{ REVIEWIMAGE : contains
+    PLACE ||--o{ REVIEW : has
 
     USER {
         int id PK
         string username
         string email
     }
+
+    PLACE {
+        int id PK
+        string name
+    }
+
     REVIEW {
         int id PK
         string title
-        text content
+        text description
         int rating
-        string place_name
         datetime date_created
         int user_id FK
+        int place_id FK
     }
+
     REVIEWIMAGE {
         int id PK
         string image
         int review_id FK
     }
-
 
 
 ```````
