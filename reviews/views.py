@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from .forms import ReviewForm
 from .models import ReviewImage ,Review,Place
 from django.core.paginator import Paginator
@@ -39,7 +39,10 @@ def home(request):
     reviews_page = paginator.get_page(page)
     return render(request, 'reviews/home.html', {'reviews': reviews_page})   
 
-    
+def place_reviews(request,place_id):
+    place=get_object_or_404(Place,id=place_id)
+    reviews=place.reviews.all()
+    return render(request,'reviews/place_reviews.html',{'place':place, 'reviews':reviews})
 
 
 class SignUpView(generic.CreateView):
