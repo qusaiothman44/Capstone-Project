@@ -1,7 +1,15 @@
 {% extends "reviews/base.html" %}
 {% block content %}
+    {% load static %}
 
-<div class="cards">
+<div id="bar" style="text-align: center;">
+<div id="sbar"><input  type="text" id="searchInput" placeholder="Search reviews..." />
+</div>
+<br>
+<button id="search">click to search</button>
+</div>
+
+<div id="cards" class="cards">
 {% for review in reviews %}
 <div class="review-card">
     <img src="{{ review.images.first.image.url }}" alt="review img">
@@ -46,4 +54,41 @@
 <a href="{% url 'reviews:new_review' %}" class="btn btn-primary fl" >Add Review</a>
 {% endif %}
 
+<script>
+const searchInput= document.getElementById('searchInput');
+const cards= document.getElementById('cards');
+const reviewCard= document.getElementsByClassName('review-card');
+
+
+searchInput.addEventListener('keyup', function() {
+
+    const filter = searchInput.value.toLowerCase();
+     
+    for(let i=0;i< reviewCard.length; i++){
+     
+        const tittle =reviewCard[i].querySelector('.card-title').textContent.toLowerCase();
+        const description =reviewCard[i].querySelector('.card-description').textContent.toLowerCase();
+        const place =reviewCard[i].querySelector('.place-name').textContent.toLowerCase();
+ if(tittle.includes(filter) || description.includes(filter) || place.includes(filter)){
+    reviewCard[i].style.display=''
+ }else{
+        reviewCard[i].style.display='none'
+
+ }
+    }
+
+});
+
+/* the search bar toggle */
+const bar =document.getElementById('bar');
+const search = document.getElementById('search')
+search.addEventListener('click',function(){
+    if(bar.style.marginTop =='-3.3em'){
+        bar.style.marginTop= '0'
+    }else{
+       bar.style.marginTop='-3.3em' 
+    }
+})
+</script>
 {% endblock %}
+

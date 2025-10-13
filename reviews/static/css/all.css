@@ -38,6 +38,7 @@ nav img{
 }
 
 nav{
+    position: relative;
         background: #e3ae4e;
     display: grid;
     grid-template-columns: 0fr 1fr 1fr;
@@ -159,7 +160,27 @@ background-color: #353243;
 .details-btn:hover {
     background-color: #0056b3;
 }
-
+#bar{
+    text-align: center;
+    margin-top: -3.3em;
+    transition: margin-top 0.5s;
+}
+#sbar{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+#search{
+    padding: 8px 14px;
+    background-color: #e94b2e;
+    color: white;
+    border-radius: 20px;
+border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  cursor: pointer;
+}
 main{
     margin: 1em;
 
