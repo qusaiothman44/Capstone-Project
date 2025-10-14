@@ -2,9 +2,9 @@
 {% block content %}
 
 <h2>Reviews For {{place.name}}</h2>
+   <div class="place">
 
 {% for review in reviews%}
-   <div>
 <div class="review-card">
     <img src="{{ review.images.first.image.url }}" alt="review img">
 
@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-   </div>
 {% endfor %}   
+   </div>
 
 {% endblock %}

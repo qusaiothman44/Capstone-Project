@@ -1,21 +1,9 @@
-.floating-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #007bff;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 50%;
-    font-size: 24px;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease;
+body{
+font-family: 'Nunito', sans-serif;
+
 }
 
-.floating-btn:hover {
-    background-color: #0056b3;
-}
+
 .nav-buttons button{
     display: inline-block;
     padding: 0.5em 1em;
@@ -59,7 +47,7 @@ a{
     color: white;
     position: fixed;
     bottom: 30px;
-    background-color: #0ba29b;
+    background-color: #e3ae4e;
     right: 30px;
     padding: 1em 0.5em;
 }
@@ -181,7 +169,37 @@ border-top-left-radius: 0;
   border-top-right-radius: 0;
   cursor: pointer;
 }
-main{
-    margin: 1em;
+.new{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.new form{
+    text-align: center;
+}
 
+.new form label{
+    display: none;
+}
+form input{
+    margin-top:1em ;
+}
+.FInput{
+    width: 100%;
+    padding: 0.5em;}
+
+.SInput ,#place-autocomplete{
+    width:33% ;
+    padding: 0.5em;
+} 
+
+input::placeholder{
+    font-family:cursive;
+}
+
+.place{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 13px;
+    margin: 1em;
 }

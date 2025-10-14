@@ -4,11 +4,39 @@
 <p>{{ review.user.username }} | {{ review.date_created }}</p>
 <p>{{ review.description }}</p>
 <p>Rating: {{ review.rating }}/5</p>
-<p>المكان: <a href="" target="_blank">{{ review.place }}</a></p>
+<p>Place: <a href="{% url 'reviews:place_reviews' review.place.id %}" target="_blank">{{ review.place }}</a></p>
 
 <div class="slider">
     {% for image in review.images.all %}
         <img src="{{ image.image.url }}" style="max-width: 300px;">
     {% endfor %}
 </div>
+
+   {% if user == review.user %}
+        <div style="margin-top: 10px;">
+          <a href="{% url 'reviews:review_update' review.pk %}" class="button">Edit</a>
+        </div>
+      {% endif %}
+<hr>
+<h3>Comments</h3>
+{% if user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Post Comment</button>
+</form>
+{% else %}
+  <p><a href="{% url 'login' %}">Login</a> to write a comment.</p>
+{% endif %}
+
+<hr>
+{% for comment in comments %}
+<div class="comment">
+
+    <strong>{{comment.user.username}}</strong>
+    <p>{{comment.content}}</p>
+    <small>{{comment.date_created}}</small>
+</div>
+  {% endfor %}
+
 {% endblock %}

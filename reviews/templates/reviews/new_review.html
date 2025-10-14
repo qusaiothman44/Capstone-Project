@@ -1,10 +1,13 @@
 {% extends "reviews/base.html" %}
 {% block content %}
-<h2>Add New review</h2>
-
+<div class="new">
 <form method="POST" enctype="multipart/form-data">
+  <h2>Add New review</h2>
     {% csrf_token %}
-    {{ form.as_p }}
+      <img src="/reviews/static/images/fred-fred-mopping.gif" alt="" style="width: 100px;">
+{{ form.title }}
+    {{form.rating}}
+     {{form.price}}
     <input id="place-autocomplete" type="text" placeholder="Write here" class="form-control">
 
 <input type="hidden" name="place_name" id="place_name">
@@ -12,16 +15,16 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW3ITRLvw3ubpp-xrJ0KyqJsd0AWoZ5xw&libraries=places&language=en"></script>
 
     <div id="image-fields">
-        <label for="images">أضف صور:</label>
         <input type="file" name="images">
     </div>
 
     <button type="button" onclick="addImageField()">➕ Add New Pic</button>
-
+    <br>
+{{form.description}}
     <br><br>
     <button type="submit">Letssss gooooo</button>
 </form>
-
+</div>
 <script>
     function addImageField() {
         const container = document.getElementById('image-fields');
