@@ -46,6 +46,8 @@ erDiagram
     USER ||--o{ REVIEW : writes
     REVIEW ||--o{ REVIEWIMAGE : contains
     PLACE ||--o{ REVIEW : has
+    USER ||--o{ COMMENT : writes
+    REVIEW ||--o{ COMMENT : receives
 
     USER {
         int id PK
@@ -73,6 +75,15 @@ erDiagram
         string image
         int review_id FK
     }
+
+    COMMENT {
+        int id PK
+        text content
+        datetime date_created
+        int user_id FK
+        int review_id FK
+    }
+
 
 
 ```````
@@ -105,5 +116,16 @@ erDiagram
 ### Photos & Visuals
 - **As a reviewer:** I want to upload photos of my stay, so that others can see what the place actually looks like.
 - **As a visitor:** I want to see user-uploaded photos on the place’s page, so that I can make informed decisions.
+
+---
+### Comments
+
+**As a logged-in user:** I want to comment on other users' reviews, so that I can share feedback or ask questions.
+
+**As a review owner:** I want to see comments on my review, so that I can engage with others.
+
+**As any user:** I want to view all comments under a review, sorted by newest first, so that I can follow the discussion easily.
+
+**As a logged-in user:** I want to delete my own comments, so I can manage what I’ve said.
 
 ---
