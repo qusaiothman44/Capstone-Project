@@ -49,7 +49,7 @@ def review_detail(request, pk):
 
 def home(request):
     reviews = Review.objects.all().order_by('-date_created')
-    paginator = Paginator(reviews, 5)  # 5 مراجعات لكل صفحة
+    paginator = Paginator(reviews, 5)  
     page = request.GET.get('page')
     reviews_page = paginator.get_page(page)
     return render(request, 'reviews/home.html', {'reviews': reviews_page})   

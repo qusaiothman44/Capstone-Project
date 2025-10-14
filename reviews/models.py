@@ -32,6 +32,12 @@ class comment(models.Model):
     def __str__(self):
         return f"commet {self.review.title}"
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio= models.TextField()
+    avatar = CloudinaryField('avatar', blank=True, null=True) 
+    def __str__(self):
+       return f"{self.user.username}'s Profile"
 
 class ReviewImage(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name='images')
