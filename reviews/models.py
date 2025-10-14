@@ -10,7 +10,7 @@ class Place(models.Model):
         return self.name
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     title = models.CharField(max_length=255)
     description = models.TextField()
     price = models.FloatField(default=0.0)
@@ -35,7 +35,7 @@ class comment(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio= models.TextField()
-    avatar = CloudinaryField('avatar', blank=True, null=True) 
+    avatar = CloudinaryField('avatar', default='5b078a59390bb4666df98b49f1cdedd0_t9ys7u') 
     def __str__(self):
        return f"{self.user.username}'s Profile"
 

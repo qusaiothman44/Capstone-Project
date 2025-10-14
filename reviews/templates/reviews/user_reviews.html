@@ -1,0 +1,38 @@
+{% extends "reviews/base.html" %}
+{% block content %}
+
+<h2>Reviews For {{Iuser.username}}</h2>
+    <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" onclick="togglePopup()" class="avatar-img">
+<h3>{{request.user.profile.bio}}</h3>
+   <div class="place">
+
+{% for review in review%}
+<div class="review-card">
+    <img src="{{ review.images.first.image.url }}" alt="review img">
+
+    <div class="card-body">
+        <h3 class="card-title">{{ review.title }}</h3>
+
+        <p class="place-name">📍 {{ review.place }}</p>
+
+        <p class="card-description">{{ review.description|truncatewords:20 }}</p>
+<h3 style="color: white;">By: {{ review.user.username }}</h3>
+        <div class="card-footer">
+            <div class="stars">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= review.rating %}
+                        <span class="star filled">★</span>
+                    {% else %}
+                        <span class="star">☆</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <a href="{% url 'reviews:review_detail' review.id %}" class="details-btn">Show more</a>
+        </div>
+    </div>
+</div>
+{% endfor %}   
+   </div>
+
+{% endblock %}

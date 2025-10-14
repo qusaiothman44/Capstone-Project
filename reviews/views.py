@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect , get_object_or_404
-from .forms import ReviewForm ,CommentForm
-from .models import ReviewImage ,Review,Place , comment
+from .forms import ReviewForm ,CommentForm ,ProfileForm
+from .models import ReviewImage ,Review,Place , comment,User
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -52,12 +52,19 @@ def home(request):
     paginator = Paginator(reviews, 5)  
     page = request.GET.get('page')
     reviews_page = paginator.get_page(page)
-    return render(request, 'reviews/home.html', {'reviews': reviews_page})   
+    form = ProfileForm(instance=request.user.profile) if request.user.is_authenticated else None
+
+    return render(request, 'reviews/home.html', {'reviews': reviews_page, 'form': form})   
 
 def place_reviews(request,place_id):
     place=get_object_or_404(Place,id=place_id)
     reviews=place.reviews.all()
     return render(request,'reviews/place_reviews.html',{'place':place, 'reviews':reviews})
+
+def user_reviews(request,user_id):
+    Iuser=get_object_or_404(User,id=user_id)
+    review=Iuser.reviews.all()
+    return render(request,'reviews/user_reviews.html',{'Iuser':Iuser, 'review':review})
 
 class reviewUpdate(LoginRequiredMixin,UpdateView):
     model = Review
@@ -66,7 +73,16 @@ class reviewUpdate(LoginRequiredMixin,UpdateView):
 
     def get_queryset(self):
         return Review.objects.filter(user=self.request.user)
-    
+
+def profile_edit(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect(request.META.get('HTTP_REFERER', 'reviews:home'))
+    return redirect('reviews:home')
+
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     template_name = 'registration/signup.html'

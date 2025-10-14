@@ -20,7 +20,7 @@
        <a href="{% url 'reviews:place_reviews' review.place.id %}"><p class="place-name">📍 {{ review.place }}</p></a>
 
         <p class="card-description">{{ review.description|truncatewords:20 }}</p>
-<h3 style="color: white;">By: {{ review.user.username }}</h3>
+<h3 style="color: white;">By:<a href="{% url 'reviews:user_reviews' review.user.id %}">{{ review.user.username }}</a> </h3>
         <div class="card-footer">
             <div class="stars">
                 {% for i in "12345" %}
@@ -38,7 +38,6 @@
 </div>
 {% endfor %}
 </div>
-
 
 
 <div class="pagination">
@@ -89,6 +88,8 @@ search.addEventListener('click',function(){
        bar.style.marginTop='-3.3em' 
     }
 })
+
+
 </script>
 {% endblock %}
 

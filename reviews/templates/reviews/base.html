@@ -13,7 +13,11 @@
         <h2>StayStory</h2>
 
         <ul class="nav-buttons">
+
           {% if user.is_authenticated %}
+
+    <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" onclick="togglePopup()" class="avatar-img">
+
     <p>Welcome, {{ user.username }}!</p>
     <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
@@ -26,9 +30,36 @@
         </ul>
     </nav>
 
+
     <main>
         {% block content %}
         {% endblock %}
     </main>
+<div id="profilePopup" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-btn" onclick="togglePopup()">&times;</span>
+
+    <h3>Edit Profile</h3>
+
+    <form method="post" action="{% url 'reviews:edit_profile' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div style="text-align: center;">
+        <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" class="avatar-img" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px;">
+      </div>
+
+      {{ form.as_p }}
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
+<script>
+            function togglePopup() {
+    const popup = document.getElementById("profilePopup");
+    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+}
+   
+</script>
+
 </body>
 </html>

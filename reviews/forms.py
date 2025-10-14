@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review , comment
+from .models import Review , comment, Profile
 
 class ReviewForm(forms.ModelForm):
     class Meta:
@@ -21,3 +21,8 @@ class CommentForm(forms.ModelForm):
         widgets={
             'content': forms.Textarea(attrs={'row':3,'placeholder':'Write your comment here...'},)
         }
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields= ['bio', 'avatar']
