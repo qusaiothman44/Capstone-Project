@@ -22,7 +22,7 @@ The purpose of StayStory is to create a trustworthy and community-driven space w
 
 ## Tech Stack
 - **Backend:** Django (Python)  
-- **Frontend:** HTML, CSS  
+- **Frontend:** HTML, CSS  ,JS
 - **Database:** PostgreSQL  
 - **Authentication:** Django’s built-in system  
 
