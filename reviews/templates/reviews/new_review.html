@@ -1,5 +1,6 @@
 {% extends "reviews/base.html" %}
 {% block content %}
+<link rel="stylesheet" href="/reviews/static/css/all.css">
 <div class="new">
 <form method="POST" enctype="multipart/form-data">
   <h2>Add New review</h2>
@@ -8,22 +9,34 @@
 {{ form.title }}
     {{form.rating}}
      {{form.price}}
-    <input id="place-autocomplete" type="text" placeholder="Write here" class="form-control">
+    <input id="place-autocomplete" type="text" placeholder="The Place" class="form-control">
 
 <input type="hidden" name="place_name" id="place_name">
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW3ITRLvw3ubpp-xrJ0KyqJsd0AWoZ5xw&libraries=places&language=en"></script>
 
     <div id="image-fields">
-        <input type="file" name="images">
+        <input type="file" name="images" required>
     </div>
 
     <button type="button" onclick="addImageField()">➕ Add New Pic</button>
     <br>
 {{form.description}}
     <br><br>
-    <button type="submit">Letssss gooooo</button>
+    <button type="submit">Submit</button>
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>]
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}
 </form>
+
 </div>
 <script>
     function addImageField() {

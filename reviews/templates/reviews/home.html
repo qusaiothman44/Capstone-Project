@@ -2,12 +2,22 @@
 {% block content %}
     {% load static %}
 
-<div id="bar" style="text-align: center;">
+
+
+<header>
+   
+    <div id="bar" style="text-align: center;">
+        <h1>Every Stay Has a <span>Story</span></h1>
+        <p>Share your journey, read real reviews, and see the world through travelers’ eyes</p>
 <div id="sbar"><input  type="text" id="searchInput" placeholder="Search reviews..." />
 </div>
 <br>
 <button id="search">click to search</button>
 </div>
+
+</header>
+
+
 
 <div id="cards" class="cards">
 {% for review in reviews %}
@@ -20,7 +30,7 @@
        <a href="{% url 'reviews:place_reviews' review.place.id %}"><p class="place-name">📍 {{ review.place }}</p></a>
 
         <p class="card-description">{{ review.description|truncatewords:20 }}</p>
-<h3 style="color: white;">By:<a href="{% url 'reviews:user_reviews' review.user.id %}">{{ review.user.username }}</a> </h3>
+<h4 style="color: white;"><a href="{% url 'reviews:user_reviews' review.user.id %}" >{{ review.user.username }} </a> {% if user.is_authenticated %}<img src="{{ request.user.profile.avatar.url }}" alt="" class="avatar-img">{% endif %} </h4> 
         <div class="card-footer">
             <div class="stars">
                 {% for i in "12345" %}
@@ -49,9 +59,7 @@
         <a href="?page={{ reviews.next_page_number }}">Next</a>
     {% endif %}
 </div>
-          {% if user.is_authenticated %}
-<a href="{% url 'reviews:new_review' %}" class="btn btn-primary fl" >Add Review</a>
-{% endif %}
+       
 
 <script>
 const searchInput= document.getElementById('searchInput');
@@ -79,13 +87,13 @@ searchInput.addEventListener('keyup', function() {
 });
 
 /* the search bar toggle */
-const bar =document.getElementById('bar');
+const bar =document.getElementById('sbar');
 const search = document.getElementById('search')
 search.addEventListener('click',function(){
-    if(bar.style.marginTop =='-3.3em'){
-        bar.style.marginTop= '0'
+    if(bar.style.display =='none'){
+        bar.style.display= 'block'
     }else{
-       bar.style.marginTop='-3.3em' 
+       bar.style.display='none' 
     }
 })
 

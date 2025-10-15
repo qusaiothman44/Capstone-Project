@@ -73,6 +73,10 @@ class reviewUpdate(LoginRequiredMixin,UpdateView):
 
     def get_queryset(self):
         return Review.objects.filter(user=self.request.user)
+class reviewDelete(LoginRequiredMixin, DeleteView):
+    model = Review
+    template_name = 'reviews/review_confirm_delete.html'
+    success_url = reverse_lazy('reviews:home')
 
 def profile_edit(request):
     profile = request.user.profile

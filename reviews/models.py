@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator,MinLengthValidator
 from cloudinary.models import CloudinaryField
 from django.urls import reverse
+
 
 class Place(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -12,7 +13,7 @@ class Place(models.Model):
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(validators=[MinLengthValidator(200)])
     price = models.FloatField(default=0.0)
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews',null=True, blank=True)

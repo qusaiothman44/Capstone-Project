@@ -1,8 +1,8 @@
 {% extends "reviews/base.html" %}
 {% block content %}
-
-<h2>Reviews For {{place.name}}</h2>
-   <div class="place">
+<link rel="stylesheet" href="/reviews/static/css/all.css">
+<h2 style="text-align: center;">Reviews For {{place.name}}</h2>
+   <div class="cards">
 
 {% for review in reviews%}
 <div class="review-card">

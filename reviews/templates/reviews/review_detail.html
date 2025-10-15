@@ -1,23 +1,40 @@
 {% extends "reviews/base.html" %}
 {% block content %}
-<h2>{{ review.title }}</h2>
-<p>{{ review.user.username }} | {{ review.date_created }}</p>
-<p>{{ review.description }}</p>
-<p>Rating: {{ review.rating }}/5</p>
-<p>Place: <a href="{% url 'reviews:place_reviews' review.place.id %}" target="_blank" style="color: black;">{{ review.place }}</a></p>
+{% load static %}
 
-<div class="slider">
-    {% for image in review.images.all %}
-        <img src="{{ image.image.url }}" style="max-width: 300px;">
-    {% endfor %}
+<div class="w">
+<div class="w3-content w3-display-container" >
+  {% for image in review.images.all %}
+            <img src="{{ image.image.url }}" class="mySlides {% if forloop.first %}active{% endif %}" alt="Review image {{ forloop.counter }}">
+        {% endfor %}
+  <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+   <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
 </div>
 
+<div class="detail">
+<h2>{{ review.title }}</h2>
+<p>{{ review.user.username }} | {{ review.date_created }}</p>
+<p class="desc">{{ review.description }}</p>
+<div class="stars">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= review.rating %}
+                        <span class="star filled">★</span>
+                    {% else %}
+                        <span class="star">☆</span>
+                    {% endif %}
+                {% endfor %}
+<p>Place: <a href="{% url 'reviews:place_reviews' review.place.id %}" target="_blank" style="color: black;">{{ review.place }}</a></p>
+
+</div>
    {% if user == review.user %}
         <div style="margin-top: 10px;">
-          <a href="{% url 'reviews:review_update' review.pk %}" class="button">Edit</a>
+        <a href="{% url 'reviews:review_update' review.pk %}" class="button">Edit</a>
+        <a href="{% url 'reviews:review_delete' review.pk %}" class="button" style="background-color:#999;">Delete</a>
+
         </div>
       {% endif %}
 <hr>
+<div class="comment-post">
 <h3>Comments</h3>
 {% if user.is_authenticated %}
 <form method="post">
@@ -28,15 +45,50 @@
 {% else %}
   <p><a href="{% url 'login' %}">Login</a> to write a comment.</p>
 {% endif %}
-
+</div>
 <hr>
 {% for comment in comments %}
 <div class="comment">
 
-    <strong>{{comment.user.username}}</strong>
+   <span><strong>{{comment.user.username}}</strong> <img src="{{ request.user.profile.avatar.url }}" alt="" class="avatar-img"></span>
     <p>{{comment.content}}</p>
     <small>{{comment.date_created}}</small>
 </div>
   {% endfor %}
 
+
+  </div>
+<script>
+
+
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " w3-white";
+}
+setInterval(() => {
+  plusDivs(1);
+}, 3000);
+</script>
 {% endblock %}

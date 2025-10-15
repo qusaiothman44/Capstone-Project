@@ -1,11 +1,18 @@
 {% extends 'reviews/base.html' %}
 
 {% block content %}
-<h2>Login</h2>
+<link rel="stylesheet" href="/reviews/static/css/all.css">
+<div class="new">
+
 <form method="post">
+  <h2>Login</h2>
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Login</button>
+  <button type="submit" class="submit">Login</button>
+  <p>Don't have an account? <a href="{% url 'signup' %}" style="color: dimgray;">Sign up</a></p>
+
 </form>
-<p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+
+</div>
+
 {% endblock %}

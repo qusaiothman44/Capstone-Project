@@ -11,6 +11,7 @@ urlpatterns = [
     path('place/<int:place_id>/', views.place_reviews, name='place_reviews'),
     path('Iuser/<int:user_id>/', views.user_reviews, name='user_reviews'),
     path('review/<int:pk>/edit/', views.reviewUpdate.as_view(), name='review_update'),
+    path('review/<int:pk>/delete/', views.reviewDelete.as_view(), name='review_delete'),
     path('profile/edit/', views.profile_edit, name='edit_profile'),
 
 ]

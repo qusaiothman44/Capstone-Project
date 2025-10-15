@@ -8,11 +8,17 @@ class ReviewForm(forms.ModelForm):
         widgets = {
 
             'title': forms.TextInput(attrs={'placeholder': 'Enter a catchy title', 'class':'FInput'}),
-            'description': forms.Textarea(attrs={'placeholder': 'Describe your experience', 'style':'width:100%;'}),
-            'rating': forms.NumberInput(attrs={'placeholder': '1 to 5', 'class':'SInput'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Describe your experience'}),
+            'rating': forms.NumberInput(attrs={'placeholder': 'Rating 1 to 5', 'class':'SInput'}),
             'price': forms.NumberInput(attrs={'placeholder': '0.0', 'class':'SInput'}),
 
         }
+        def __init__(self, *args, **kwargs):
+
+            super().__init__(*args, **kwargs)
+            for field in self.fields.values():
+
+                field.required = True
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -25,4 +31,7 @@ class CommentForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields= ['bio', 'avatar']
+        fields= ['bio']
+        widgets={
+            'bio':forms.Textarea(attrs={'placeholder':'Write your bio'})
+        }
