@@ -130,26 +130,25 @@ erDiagram
 
 ---
 %% --- INSTALLATION & SETUP GUIDE ---
+flowchart TD
+    A[📁 Clone Repository] --> B[💻 Install Dependencies (Pipenv)]
+    B --> C[🐘 Setup PostgreSQL Database]
+    C --> D[⚙️ Apply Migrations]
+    D --> E[🌱 (Optional) Load Demo Data]
+    E --> F[🚀 Run Development Server]
 
-%% 🛠️ Installation & Setup
+    subgraph Steps
+    A1["git clone https://github.com/yourusername/StayStory.git"]
+    A2["cd StayStory"]
+    B1["pipenv install"]
+    B2["pipenv shell"]
+    C1["CREATE DATABASE staystory_db;"]
+    D1["python manage.py makemigrations"]
+    D2["python manage.py migrate"]
+    E1["python manage.py shell"]
+    E2["from staystory_db.load_data import load_data()"]
+    E3["load_data()"]
+    F1["python manage.py runserver"]
+    end
 
-%% Step-by-step guide to run StayStory locally
-
-graph TD
-
-A[🏁 Start Installation] --> B[⬇️ 1. Clone Repository]
-B -->|"git clone https://github.com/yourusername/StayStory.git"| C[💻 2. Create Virtual Environment]
-C -->|"python -m venv venv"| D[⚡ Activate Environment]
-D -->|"Windows: venv\\Scripts\\activate <br> Mac/Linux: source venv/bin/activate"| E[📦 3. Install Dependencies]
-E -->|"pip install -r requirements.txt"| F[🗄️ 4. Setup PostgreSQL Database]
-F -->|"CREATE DATABASE staystory_db;"| G[🧩 5. Apply Migrations]
-G -->|"python manage.py makemigrations <br> python manage.py migrate"| H[🌱 6. Load Demo Data (Optional)]
-H -->|"from staystory_db.load_data import load_data"| I[👤 7. Create Superuser]
-I -->|"python manage.py createsuperuser"| J[🚀 8. Run Server]
-J -->|"python manage.py runserver"| K[🌐 Open: http://127.0.0.1:8000]
-K --> L[📁 9. Collect Static Files (Optional)]
-L -->|"python manage.py collectstatic"| M[✅ Done! Project Ready 🎉]
-
-%% Description
-classDef step fill:#222,color:#fff,stroke:#555,stroke-width:1px;
-class A,B,C,D,E,F,G,H,I,J,K,L,M step;
+    click A href "https://github.com/yourusername/StayStory" "Open Repository"
