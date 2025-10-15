@@ -50,7 +50,7 @@
 {% for comment in comments %}
 <div class="comment">
 
-   <span><strong>{{comment.user.username}}</strong> <img src="{{ request.user.profile.avatar.url }}" alt="" class="avatar-img"></span>
+   <span><strong>{{comment.user.username}}</strong> <img src="{{ comment.user.profile.avatar.url }}" alt="" class="avatar-img"></span>
     <p>{{comment.content}}</p>
     <small>{{comment.date_created}}</small>
 </div>
