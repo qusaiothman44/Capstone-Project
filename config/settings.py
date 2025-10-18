@@ -81,16 +81,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'staystory_db',
-        'USER': 'postgres',
-        'PASSWORD': '0000',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+
 if 'ON_HEROKU' in os.environ:
     DATABASES = {
         "default": dj_database_url.config(
@@ -105,7 +96,10 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'staystory_db',
-            # The value of 'NAME' should match the value of 'NAME' you replaced.
+            'USER': 'postgres',
+            'PASSWORD': '0000',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 if not 'ON_HEROKU' in os.environ:
