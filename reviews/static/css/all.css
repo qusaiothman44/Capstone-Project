@@ -187,13 +187,14 @@ color:#ecad46 ;
 }
 .review-card{
     min-height: 510px;
-     flex: 1 1 calc(33.333% - 40px); /* 3 per row with spacing */
-  max-width: calc(37.333% - 40px);
+     flex: 1 1 calc(33.333% - 20px); 
+  max-width: calc(33.333% - 20px);
   margin-bottom: 2em;
   
   box-shadow: 0 1px 8px 0 #110f1c, 0 1px 3px 0 #110f1c;
   border-radius: 30px;
   position: relative;
+  flex-direction: column;
 }
 
 .review-card:hover{
@@ -202,13 +203,15 @@ color:#ecad46 ;
 .review-card img{
     max-height:200px;
     width: 100%;
+    height: 200px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
 }
 .cards{
-    display: flex
-;
-    gap: 14px;
+    display: flex;
+      justify-content: center;
+
+    gap: 20px;
     width: 90%;
     margin: 2em auto;
     flex-wrap: wrap;
@@ -264,6 +267,7 @@ p:has(> label[for="id_avatar"]) input {
 }
 .w3-content img{
     max-height: 365px;
+    
 }
 .card-body h4{
     display: flex;
