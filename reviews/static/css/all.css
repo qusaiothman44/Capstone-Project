@@ -490,18 +490,12 @@ color: #0aa69b;
 .new form label{
    color: dimgray;
 }
-.errorlist li{
+.errors li{
     color: red;
     opacity: 0.6;
     
 }
-.helptext{
-    display: none;
-}
 
-.new ul{
-    display: none;
-}
 #icon{
     display: none;
 }
