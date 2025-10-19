@@ -30,10 +30,11 @@
                 <a href="{% url 'reviews:new_review' %}" class="add-review-btn">Add Review</a>
            
             
-            
-                <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" onclick="togglePopup()" class="avatar-img">
-           
-           
+            {% if user.is_authenticated %}
+   
+    <a href="{% url 'reviews:profile_edit' %}"> <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" class="avatar-img"></a>
+{% endif %}
+
                 <p>Welcome, {{ user.username }}!</p>
             
            
@@ -63,29 +64,9 @@
         {% block content %}
         {% endblock %}
     </main>
-<div id="profilePopup" class="popup-overlay">
-  <div class="popup-content">
-    <span class="close-btn" onclick="togglePopup()">&times;</span>
-<div>
-    <h3>Edit Profile</h3>
-    <form method="post" action="{% url 'reviews:edit_profile' %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div style="text-align: center;">
-        <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" class="avatar-img" >
-      </div>
 
-      {{ form.as_p }}
-
-      <button type="submit">Save</button>
-    </form>
-  </div>
-  </div>
-</div>
 <script>
-            function togglePopup() {
-    const popup = document.getElementById("profilePopup");
-    popup.style.display = (popup.style.display === "block") ? "none" : "block";
-}
+       
 
    function menu(){
     const navM= document.getElementById('nav')

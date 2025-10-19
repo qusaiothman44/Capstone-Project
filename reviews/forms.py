@@ -33,5 +33,6 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields= ['bio','avatar']
         widgets={
-            'bio':forms.Textarea(attrs={'placeholder':'Write your bio'})
+            'bio':forms.Textarea(attrs={'placeholder':'Write your bio'}),
+
         }

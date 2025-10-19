@@ -1,0 +1,22 @@
+{% extends "reviews/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="new">
+<form method="post" action="{% url 'reviews:profile_edit' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div style="text-align: center;">
+        {% if request.user.profile.avatar %}
+            <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" class="avatar-img">
+        {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Avatar" class="avatar-img">
+        {% endif %}
+    </div>
+
+    {{ form.as_p }}
+
+    <button type="submit">Save</button>
+</form>
+</div>
+{% endblock %}

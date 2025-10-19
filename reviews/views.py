@@ -84,8 +84,11 @@ def profile_edit(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect(request.META.get('HTTP_REFERER', 'reviews:home'))
-    return redirect('reviews:home')
+            return redirect('reviews:profile_edit')  # بعد الحفظ، ارجع لنفس الصفحة
+    else:
+        form = ProfileForm(instance=profile)  # GET request
+    
+    return render(request, 'reviews/Profile.html', {'form': form})
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm

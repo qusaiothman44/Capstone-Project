@@ -200,6 +200,7 @@ color:#ecad46 ;
     top: 1em;
 }
 .review-card img{
+    max-height:200px;
     width: 100%;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -238,6 +239,29 @@ a{
     cursor: pointer;
 }
 
+p:has(> label[for="id_avatar"]) a,
+p:has(> label[for="id_avatar"]) small,
+p:has(> label[for="id_avatar"]) br {
+  display: none !important;
+}
+.new p label{
+    display: none !important;
+}
+/* أو إذا بدك تخفي النص كله "Currently: ..." وتترك فقط الزر */
+p:has(> label[for="id_avatar"]) {
+  font-size: 0;
+}
+p:has(> label[for="id_avatar"]) label,
+p:has(> label[for="id_avatar"]) input {
+  font-size: initial;
+}
+.profile form{
+        display: flex
+;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+}
 
 .card-body h4{
     display: flex;
